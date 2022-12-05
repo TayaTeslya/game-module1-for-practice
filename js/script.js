@@ -1,7 +1,7 @@
 const buttonLevelPassed = document.getElementById('button');
 const description = document.getElementById('description');
 const numberOfLevel = document.getElementById('number-of-level');
-let level = 20;
+let level = 1;
 let textArea;
 let code;
 const animals = document.getElementById('animals');
@@ -322,7 +322,6 @@ function setAnimals() {
 }
 
 function checkCode() {
-    console.log(getComputedStyle(animals.children[1]));
     code = textArea.value.split('\n');
     if (level <= 12 || level >= 15) {
         animals.children[1].style.cssText = "";
@@ -342,7 +341,7 @@ function checkCode() {
             animals.children[1].children[4].style.cssText += code[el];
         }
     }
-    if (code.length == document.getElementById('code-conteiner').children[1].children[0].rows) {
+    if (code.length == document.getElementById('code-conteiner').children[1].children[0].rows || level == 20 || level == 16) {
         if (level <= 12 || level >= 14) {
             styles = getComputedStyle(animals.children[0]);
         }
@@ -364,15 +363,33 @@ function checkCode() {
             }
         }
         if (bool) {
+            setHappyCats();
             buttonLevelPassed.disabled = false;
         }
         else if (buttonLevelPassed.disabled != true) {
+            setSadCats();
             buttonLevelPassed.disabled = true;
         }
     }
     else if (buttonLevelPassed.disabled != true) {
         buttonLevelPassed.disabled = true;
     }
+}
+
+function setHappyCats() {
+    for (const cat in animals.children[1].children) {
+        if (animals.children[1].children[cat].src != undefined && animals.children[1].children[cat].src != '../assets/dogs/dog.png' && !(animals.children[1].children[cat].src.indexOf('-heart') >= 0)) {
+            animals.children[1].children[cat].src = animals.children[1].children[cat].src.replace('.png', '-heart.png');
+        }
+    } //justify-content: space-between; 
+}
+
+function setSadCats() {
+    for (const cat in animals.children[1].children) {
+        if (animals.children[1].children[cat].src != undefined && animals.children[1].children[cat].src != '../assets/dogs/dog.png' && (animals.children[1].children[cat].src.indexOf('-heart') >= 0)) {
+            animals.children[1].children[cat].src = animals.children[1].children[cat].src.replace('-heart', '');
+        }
+    } //justify-content: space-between; 
 }
 
 function level1() {
