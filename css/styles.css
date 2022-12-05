@@ -1,0 +1,271 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300&family=Lexend+Exa:wght@300;400&display=swap');
+
+.material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 48
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: none;
+    box-sizing: border-box;
+    font-family: 'Lexend Exa', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+}
+
+.div-main {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+}
+
+.div-code-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    color: #DEE5ED;
+    background-color: #03484D;
+    height: 100%;
+    width: 50%;
+    gap: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title {
+    font-size: 60px;
+    line-height: 100px;
+}
+
+
+.levels-wrapper {
+    padding-right: 60px;
+    display: flex;
+}
+
+button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    height: 35px;
+    font-family: 'Exo 2', sans-serif;
+    background-color: #8AC1C8;
+    padding: 5px;
+}
+
+button:hover {
+    background-color: #a3e2eb;
+}
+
+.arrow-left {
+    border-radius: 5px 0px 0px 5px;
+    border-right: 2px solid #03484D;
+}
+
+.arrow-right {
+    border-radius: 0px 5px 5px 0px;
+    border-left: 2px solid #03484D;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    line-height: 25px;
+    font-family: 'Exo 2', sans-serif;
+    gap: 10px;
+}
+
+.code-wrapper {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    background-color: #C8C4BB;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.number-row {
+    padding: 15px 5px 15px 0px;
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    width: 30px;
+    background-color: #a5a39e;
+    color: #03484D;
+    font-size: 20px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.textarea-code {
+    width: 100%;
+    /* display: block; */
+}
+
+.indent {
+    padding-left: 20px;
+}
+
+textarea {
+    color: #39b8c9;
+    font-size: 20px;
+    width: 60%;
+    resize: none;
+    background-color: #e2ded6;
+    overflow: hidden;
+}
+
+strong {
+    text-decoration: underline;
+}
+
+ul {
+    padding-left: 30px;
+}
+
+.code {
+    width: 100%;
+    padding: 15px 0px 15px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.code p {
+    display: flex;
+    flex-direction: column;
+    color: #03484D;
+    font-size: 20px;
+}
+
+.button-next-level {
+    display: flex;
+    justify-content: right;
+    width: 100%;
+}
+
+.button-next-level button {
+    border-radius: 5px;
+    padding: 0px 15px;
+}
+
+.button-next-level button:disabled {
+    background-color: #c26969;
+    color: rgb(214, 180, 180);
+}
+
+.levels-wrapper button:disabled:hover {
+    background-color: #8AC1C8;
+}
+
+.div-animal-wrapper {
+    background-color: #8AC1C8;
+    display: flex;
+    position: relative;
+    height: 100%;
+    width: 50%;
+}
+
+.food-bowls {
+    padding: 40px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    
+}
+
+.animals {
+    padding: 40px;
+    min-width: 100%;
+    min-height: 100%;
+    display: flex;
+    position: absolute;
+}
+
+img {
+    max-height: 150px;
+    max-width: 150px;
+}
+
+.food-bowls-level1 {
+    justify-content: flex-end;
+}
+
+.food-bowls-level2 {
+    justify-content: space-between;
+}
+
+.food-bowls-level3 {
+    justify-content: center;
+}
+
+.food-bowls-level4 {
+    justify-content: space-around;
+}
+
+.food-bowls-level5 {
+    align-items: flex-end;
+}
+
+.food-bowls-level6 {
+    justify-content: center;
+    align-items: center;
+}
+
+.food-bowls-level7 {
+    align-items: flex-end;
+    justify-content: space-around;
+}
+
+.food-bowls-level8 {
+    flex-direction: column;
+}
+
+.food-bowls-level9 {
+    flex-direction: column-reverse;
+}
+
+.food-bowls-level10 {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+
+.food-bowls-level11 {
+    flex-direction: column-reverse;
+    justify-content: space-between; 
+}
+
+.food-bowls-level12 {
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.green-bowl-level13 {
+    order: 1;
+}
+
+.red-bowl-level14 {
+    order: -1;
+}
+
+.food-bowls-level15 {
+    flex-wrap: wrap;
+}
+
+
+
+
+
