@@ -1,7 +1,7 @@
 const buttonLevelPassed = document.getElementById('button');
 const description = document.getElementById('description');
 const numberOfLevel = document.getElementById('number-of-level');
-let level = 15;
+let level = 20;
 let textArea;
 let code;
 const animals = document.getElementById('animals');
@@ -26,8 +26,8 @@ pastLevel.addEventListener('click', () => {
 })
 
 buttonLevelPassed.addEventListener('click', () => {
-    if (level == 12) {
-        goToLevel(-11);
+    if (level == 20) {
+        goToLevel(-19);
     }
     else {
         goToLevel(1);
@@ -39,7 +39,7 @@ function startLevel() {
         pastLevel.disabled = true;
         nextLevel.disabled = false;
     }
-    else if (level == 12) {
+    else if (level == 20) {
         nextLevel.disabled = true;
         pastLevel.disabled = false;
     }
@@ -47,7 +47,6 @@ function startLevel() {
         nextLevel.disabled = false;
         pastLevel.disabled = false;
     }
-    console.log(level);
     switch (level) {
         case 1: level1(); break;
         case 2: level2(); break;
@@ -61,14 +60,14 @@ function startLevel() {
         case 10: level10(); break;
         case 11: level11(); break;
         case 12: level12(); break;
-        case 13: level12(); break;
-        case 14: level12(); break;
-        case 15: level12(); break;
-        case 16: level12(); break;
-        case 17: level12(); break;
-        case 18: level12(); break;
-        case 19: level12(); break;
-        case 20: level12(); break;
+        case 13: level13(); break;
+        case 14: level14(); break;
+        case 15: level15(); break;
+        case 16: level16(); break;
+        case 17: level17(); break;
+        case 18: level18(); break;
+        case 19: level19(); break;
+        case 20: level20(); break;
         default:
             break;
     }
@@ -90,6 +89,7 @@ function clearAll() {
         }
     }
     animals.children[1].style.cssText = null;
+    animals.children[1].classList.remove('animals-wrap');
     animals.children[0].classList.remove('food-bowls-level' + level);
 }
 
@@ -121,6 +121,34 @@ function setDescription(property) {
                                     'элементы располагаются снизу вверх'
                                     ]
             break;
+        case 'flex-wrap':
+            properties = ['nowrap', 'row-reverse', 'column']
+            propertiesDescriptions = [' размеры элементов устанавливаются автоматически, чтобы они поместились в один ряд',
+                                    'элементы автоматически переносятся на новую строку',
+                                    'элементы автоматически переносятся на новую строку, но строки расположены в обратном порядке'
+                                    ]
+            break;
+        case 'align-content':
+            properties = ['flex-start', 'flex-end', 'center', 'space-between', 'space-around', 'stretch']
+            propertiesDescriptions = ['ряды группируются в верхней части',
+                                'ряды группируются в нижней части',
+                                'ряды группируются вертикально по центру',
+                                'ряды отображаются с одинаковыми расстояниями между ними',
+                                'ряды отображаются с одинаковыми расстояниями вокруг них',
+                                'ряды растягиваются, чтобы заполнить место равномерно'
+                                ]
+            break;
+        case 'all':
+            properties = ['justify-content', 'align-items', 'flex-direction', 'order', 'flex-wrap', 'flex-flow', 'align-content']
+            propertiesDescriptions = ['',
+                                '',
+                                '',
+                                '',
+                                '',
+                                '',
+                                ''
+                                ]
+            break;
         default:
             properties = [];
             propertiesDescriptions = [];
@@ -138,71 +166,61 @@ function setDescription(property) {
     }
 }
 
-function getSpan(text) {
+function getSpan(text, cl = null) {
     let span = document.createElement('span');
     span.textContent = text;
+    if (cl) {
+        span.classList.add(cl);
+    }
     return span;
+}
+
+function setTextarea() {
+    textarea = document.createElement('textarea');
+    if (level == 6 || level == 7 || (level >= 10 && level <=11) || (level == 16)) {
+        textarea.rows = 2;
+    }
+    else if (level == 12) {
+        textarea.rows = 3;
+    }
+    else if (level == 20) {
+        textarea.rows = 4;
+    }
+    else {
+        textarea.rows = 1;
+    }
+    textarea.setAttribute('id', 'code');
+    return textarea;
 }
 
 function setCode() {
     const codeConteiner = document.getElementById('code-conteiner');
-    let span;
-    let textarea;
-    if (level < 13) {
-        span = getSpan('.class {');
-        codeConteiner.children[0].appendChild(span);
-        span = getSpan('display: flex;');
-        span.classList.add('indent');
-        codeConteiner.children[0].appendChild(span);
-        textarea = document.createElement('textarea');
-        if (level == 6 || level == 7 || (level >= 10 && level <=11)) {
-            textarea.rows = 2;
+    if (level < 13 || level >= 15) {
+        codeConteiner.children[0].appendChild(getSpan('.class {'));
+        codeConteiner.children[0].appendChild(getSpan('display: flex;', 'indent'));
+        if (level == 18) {
+            codeConteiner.children[0].appendChild(getSpan('flex-wrap: wrap;', 'indent'));
         }
-        else if (level == 12) {
-            textarea.rows = 3;
-        }
-        else {
-            textarea.rows = 1;
-        }
-        textarea.setAttribute('id', 'code');
-        codeConteiner.children[1].appendChild(textarea);
-        span = getSpan('}');
-        codeConteiner.children[2].appendChild(span);
+        codeConteiner.children[1].appendChild(setTextarea());
+        codeConteiner.children[2].appendChild(getSpan('}'));
     }
-    else if (level < 16) {
-        span = getSpan('.class {');
-        codeConteiner.children[0].appendChild(span);
-        span = getSpan('display: flex;');
-        span.classList.add('indent');
-        codeConteiner.children[0].appendChild(span);
-        span = getSpan('}');
-        codeConteiner.children[0].appendChild(span);
+    else if (level <= 14) {
+        codeConteiner.children[0].appendChild(getSpan('.class {'));
+        codeConteiner.children[0].appendChild(getSpan('display: flex;', 'indent'));
+        codeConteiner.children[0].appendChild(getSpan('}'));
         codeConteiner.children[0].appendChild(document.createElement('br'));
-        span = getSpan('.green-cat {');
-        codeConteiner.children[0].appendChild(span);
-        textarea = document.createElement('textarea');
-        if (level == 6 || level == 7 || (level >= 10 && level <=11)) {
-            textarea.rows = 2;
-        }
-        else if (level == 12) {
-            textarea.rows = 3;
-        }
-        else {
-            textarea.rows = 1;
-        }
-        textarea.setAttribute('id', 'code');
-        codeConteiner.children[1].appendChild(textarea);
-        span = getSpan('}');
-        codeConteiner.children[2].appendChild(span);
+        codeConteiner.children[0].appendChild(getSpan('.green-cat {'));
+        codeConteiner.children[1].appendChild(setTextarea());
+        codeConteiner.children[2].appendChild(getSpan('}'));
     }
 }
 
 function loadLevel() {
-    numberOfLevel.textContent = level + '/16';
+    numberOfLevel.textContent = level + '/20';
     setCode();
     setAnimals();
     textArea = document.getElementById('code');
-    code = textArea.value.split('\n');
+    // code = textArea.value.split('\n');
     textArea.addEventListener('keyup', checkCode);
 }
 
@@ -219,7 +237,7 @@ function getImg(path, alt, index, cl = null) {
 
 function setAnimals() {
     animals.children[0].classList.add('food-bowls-level' + level);
-    if (level == 1 || level == 6) {
+    if (level == 1 || level == 6) { 
         getImg('../assets/eat/food-bowl.png', 'миска', 0);
         getImg('../assets/dogs/dog.png', 'собака', 1);
     }
@@ -246,36 +264,67 @@ function setAnimals() {
         getImg('../assets/cats/red-cat.png', 'красная кошка', 1);
     }
     else if (level == 14) {
-        getImg('../assets/eat/blue-food-bowl.png', 'синяя миска', 0);
-        getImg('../assets/eat/blue-food-bowl.png', 'синяя миска', 0);
-        getImg('../assets/eat/blue-food-bowl.png', 'синяя миска', 0);
-        getImg('../assets/eat/blue-food-bowl.png', 'синяя миска', 0);
+        for (i = 0; i < 4; i++) {
+            getImg('../assets/eat/blue-food-bowl.png', 'синяя миска', 0);
+        }
         getImg('../assets/eat/red-food-bowl.png', 'красная миска', 0, 'red-bowl-level14');
-        getImg('../assets/cats/blue-cat.png', 'синяя кошка', 1);
-        getImg('../assets/cats/blue-cat.png', 'синяя кошка', 1);
-        getImg('../assets/cats/blue-cat.png', 'синяя кошка', 1);
-        getImg('../assets/cats/blue-cat.png', 'синяя кошка', 1);
+        for (i = 0; i < 4; i++) {
+            getImg('../assets/cats/blue-cat.png', 'синяя кошка', 1);
+        }
         getImg('../assets/cats/red-cat.png', 'красная кошка', 1);
     }
     else if (level == 15) {
         getImg('../assets/eat/blue-food-bowl.png', 'синяя миска', 0);
-        getImg('../assets/eat/red-food-bowl.png', 'красная миска', 0);
-        getImg('../assets/eat/red-food-bowl.png', 'красная миска', 0);
-        getImg('../assets/eat/red-food-bowl.png', 'красная миска', 0);
-        getImg('../assets/eat/red-food-bowl.png', 'красная миска', 0);
+        for (i = 0; i < 6; i++) {
+            getImg('../assets/eat/red-food-bowl.png', 'красная миска', 0);
+        }
         getImg('../assets/eat/green-food-bowl.png', 'зеленая миска', 0);
         getImg('../assets/cats/blue-cat.png', 'синяя кошка', 1);
-        getImg('../assets/cats/red-cat.png', 'красная кошка', 1);
-        getImg('../assets/cats/red-cat.png', 'красная кошка', 1);
-        getImg('../assets/cats/red-cat.png', 'красная кошка', 1);
-        getImg('../assets/cats/red-cat.png', 'красная кошка', 1);
+        for (i = 0; i < 6; i++) {
+            getImg('../assets/cats/red-cat.png', 'красная кошка', 1);
+        }
         getImg('../assets/cats/green-cat.png', 'зеленая кошка', 1);
+    }
+    else if (level == 16 || level == 17) {
+        for (i = 0; i < 5; i++) {
+            getImg('../assets/eat/blue-food-bowl.png', 'синяя миска', 0);
+            getImg('../assets/cats/blue-cat.png', 'синяя кошка', 1);
+        }
+        for (i = 0; i < 5; i++) {
+            getImg('../assets/eat/red-food-bowl.png', 'красная миска', 0);
+            getImg('../assets/cats/red-cat.png', 'красная кошка', 1);
+        }
+        for (i = 0; i < 5; i++) {
+            getImg('../assets/eat/green-food-bowl.png', 'зеленая миска', 0);
+            getImg('../assets/cats/green-cat.png', 'зеленая кошка', 1);
+        }
+    }
+    else if (level == 18 || level == 19) {
+        animals.children[1].classList.add('animals-wrap');
+        for (i = 0; i < 15; i++) {
+            getImg('../assets/eat/red-food-bowl.png', 'красная миска', 0);
+            getImg('../assets/cats/red-cat.png', 'красная кошка', 1);
+        }
+    }
+    else if (level == 20) {
+        getImg('../assets/eat/blue-food-bowl.png', 'синяя миска', 0);
+        getImg('../assets/cats/blue-cat.png', 'синяя кошка', 1);
+        for (i = 0; i < 4; i ++) {
+            getImg('../assets/eat/red-food-bowl.png', 'красная миска', 0);
+            getImg('../assets/cats/red-cat.png', 'красная кошка', 1);
+
+        }
+        for (i = 0; i < 2; i++) {
+            getImg('../assets/eat/green-food-bowl.png', 'зеленая миска', 0);
+            getImg('../assets/cats/green-cat.png', 'зеленая кошка', 1);
+        }
     }
 }
 
 function checkCode() {
+    console.log(getComputedStyle(animals.children[1]));
     code = textArea.value.split('\n');
-    if (level <= 12) {
+    if (level <= 12 || level >= 15) {
         animals.children[1].style.cssText = "";
         for (const el in code) {
             animals.children[1].style.cssText += code[el];
@@ -294,7 +343,7 @@ function checkCode() {
         }
     }
     if (code.length == document.getElementById('code-conteiner').children[1].children[0].rows) {
-        if (level <= 12 || level >= 15) {
+        if (level <= 12 || level >= 14) {
             styles = getComputedStyle(animals.children[0]);
         }
         else if (level == 13) {
@@ -308,7 +357,7 @@ function checkCode() {
         for (const el in code) {
             style = code[el].split(':');
             try { 
-                style[1] = style[1].replace(' ', ''); 
+                style[1] = style[1].trim(); //убирает все пробелы по бокам
             } catch (error) {}
             if (styles.getPropertyValue(style[0]) + ';' !== style[1]) {
                 bool = false;
@@ -425,17 +474,41 @@ function level14() {
     loadLevel();
 }
 function level15() {
-    description.children[0].children[0].textContent = ' ';
-    description.children[0].children[1].textContent = ' ';
-    description.children[0].children[2].textContent = ' ';
-    setDescription('');
+    description.children[0].children[0].textContent = 'О нет! Кажется котики не влезли в один ряд! Перенеси их с помощью свойства';
+    description.children[0].children[1].textContent = 'flex-wrap,';
+    description.children[0].children[2].textContent = 'принимающего значения:';
+    setDescription('flex-wrap');
     loadLevel();
 }
 function level16() {
-    description.children[0].children[0].textContent = ' ';
-    description.children[0].children[1].textContent = ' ';
-    description.children[0].children[2].textContent = ' ';
+    description.children[0].children[0].textContent = 'Помоги этим пушистым клубочкам распределиться по мисочкам с помощью комбинации свойств';
+    description.children[0].children[1].textContent = 'flex-wrap и flex-direction.';
     setDescription('');
     loadLevel();
 }
-
+function level17() {
+    description.children[0].children[0].textContent = 'Свойства flex-wrap и flex-direction используются достаточно часто, поэтому было создано свойство';
+    description.children[0].children[1].textContent = 'flex-flow,';
+    description.children[0].children[2].textContent = 'для их объединения. Это свойство применяет их значения, разделенные пробелом, например: flex-flow: row nowrap. Используй flex-flow, чтобы повторить выполнение предыдущего уровня, но на этот раз одной строкой :).';
+    setDescription('');
+    loadLevel();
+}
+function level18() {
+    description.children[0].children[0].textContent = 'Котиков раскидало по всей комнате, но миски расположены вверху. Ты можешь использовать свойство';
+    description.children[0].children[1].textContent = 'align-content,';
+    description.children[0].children[2].textContent = 'чтобы указать, как должны ряды разделяться друг от друга. Свойство принимает следующие значения:';
+    setDescription('align-content');
+    loadLevel();
+}
+function level19() {
+    description.children[0].children[0].textContent = 'Теперь миски расположены на одинаковом расстоянии друг от друга. Используй свойство';
+    description.children[0].children[1].textContent = 'align-content,';
+    description.children[0].children[2].textContent = 'чтобы расположить котиков у мисок.';
+    setDescription('');
+    loadLevel();
+}
+function level20() {
+    description.children[0].children[0].textContent = 'Котики просят у тебя помощи в последний раз! Дальше они будут справляться сами :с. Используй все изученные свойства, чтобы помочь им добраться до своих мисок:';
+    setDescription('all');
+    loadLevel();
+}
