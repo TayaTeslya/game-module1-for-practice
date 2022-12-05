@@ -176,6 +176,7 @@ ul {
     position: relative;
     height: 100%;
     width: 50%;
+    overflow: hidden;
 }
 
 .food-bowls {
@@ -183,13 +184,13 @@ ul {
     width: 100%;
     height: 100%;
     display: flex;
-    
+    position: absolute;
 }
 
 .animals {
     padding: 40px;
-    min-width: 100%;
-    min-height: 100%;
+    width: 100%;
+    height: 100%;
     display: flex;
     position: absolute;
 }
@@ -265,7 +266,43 @@ img {
     flex-wrap: wrap;
 }
 
+.food-bowls-level16 {
+    flex-direction: column;
+    flex-wrap: wrap;
+}
 
+.food-bowls-level17 {
+    flex-flow: column wrap;
+}
+
+.food-bowls-level18 {
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+.animals-wrap {
+    flex-wrap: wrap;
+}
+
+.food-bowls-level19 {
+    flex-wrap: wrap;
+    align-content: space-between;
+}
+
+.food-bowls-level20 {
+    flex-flow: column-reverse wrap-reverse;
+    /* flex-direction: column-reverse;
+    flex-wrap: wrap-reverse; */
+    justify-content: center; 
+    align-content: space-between;
+}
+
+ /*  
+flex-direction: column-reverse;
+flex-wrap: wrap-reverse;
+justify-content: center; 
+align-content: space-between;
+ */
 
 
 
